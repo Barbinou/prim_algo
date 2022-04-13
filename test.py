@@ -23,4 +23,5 @@ def afficher_matrice (adjacente) :
         print()
 
 afficher_matrice(graph.prim())
+print(tabToString(graph.prim()))
 print(str(graph))
