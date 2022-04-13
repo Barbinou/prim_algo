@@ -29,35 +29,35 @@ class Graphe:
 
         grand_nombre = math.inf  # créa nombre infini qu'ils soit plus petit que la valeur du premier noeud
 
-        liste_noeud_parcouru = []
-        for i in range(self.nombre_sommet):
+        liste_noeud_parcouru = []  # création de la liste des sommets 
+        for i in range(self.nombre_sommet):  
             liste_noeud_parcouru.append(0)
 
         fin_boucle = 0
 
-        liste_noeud_parcouru[0] = True
+        liste_noeud_parcouru[0] = True #premier sommet parcouru 
 
-        prim = matrice_zero(self.nombre_sommet)
+        prim = matrice_zero(self.nombre_sommet)  # créa de la matrice zero 
 
-        while fin_boucle < self.nombre_sommet - 1:
+        while fin_boucle < self.nombre_sommet - 1: 
 
-            min = grand_nombre
+            min = grand_nombre   #min = infini pour que le chemin est tjrs une valeur plus petite 
             sommet_i = 0
             sommet_f = 0
 
-            for i in range(self.nombre_sommet):
+            for i in range(self.nombre_sommet): # i etant la ligne et j la colonne on fait un double for 
                 if liste_noeud_parcouru[i]:
                     for j in range(self.nombre_sommet):
                         if not liste_noeud_parcouru[j] and self.graphe[i][j]:
-                            if min > self.graphe[i][j]:
+                            if min > self.graphe[i][j]:  #change la condition du min si celui-ci est plus petit
                                 min = self.graphe[i][j]
-                                sommet_i = i
+                                sommet_i = i   
                                 sommet_f = j
 
-            liste_noeud_parcouru[sommet_f] = True
-            fin_boucle += 1
-            prim[sommet_i][sommet_f] = min
-            prim[sommet_f][sommet_i] = prim[sommet_i][sommet_f]
+            liste_noeud_parcouru[sommet_f] = True  #on marque le sommet que l'on vient de parcourir 
+            fin_boucle += 1   # on incremente 1 pour que la boucle s'arrête quand nous avons visiter tous les sommets 
+            prim[sommet_i][sommet_f] = min  #incremente la valeur dans la matrice zero de départ
+            prim[sommet_f][sommet_i] = prim[sommet_i][sommet_f] #comme c'est un graphe non orienté on ajoute dans les 2 sens 
 
         return prim
 
