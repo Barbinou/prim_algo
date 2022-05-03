@@ -1,7 +1,6 @@
 import random
 import math
 
-
 def matrice_zero(length):  # Matrice de length par length de 0
     matrice = []
     for i in range(length):

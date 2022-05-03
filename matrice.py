@@ -14,13 +14,13 @@ class Graphe:
 def saisie_arete () :
     sommet_i = int(input("Entrer le sommet initial en chiffre : "))
     sommet_f = int(input("Entrer le sommet final en chiffre : "))
-    sommet_v = int(input("Entrer la valeur de l'arete : "))
+    sommet_v = int(input("Entrer la valeur de l'arête : "))
     arete = Arete(sommet_i, sommet_f, sommet_v)
     return arete 
 
 def saisie_graphe () :
     nombre_s = int(input("Entrer le nombre de sommet : "))
-    n = int(input("Veuillez le nombre d'aretes : "))
+    n = int(input("Veuillez entrer le nombre d'arêtes : "))
     liste = []
     for i in range(n) :
         liste.append(saisie_arete())
@@ -91,9 +91,14 @@ def puissance(matrice, n):
     return matrice_final 
 
 def nombre_chemin (matrice, longueur_chemin, sommet1, sommet2) : 
-    matrice_nc = puissance(matrice, longueur_chemin)
-    nombreChemin = (matrice_nc [sommet1 - 1] [sommet2 - 1]) + (matrice_nc [sommet2 - 1][sommet1 - 1])
-    return nombreChemin
+    if sommet1 != sommet2 : 
+        matrice_nc = puissance(matrice, longueur_chemin)
+        nombreChemin = (matrice_nc [sommet1 - 1] [sommet2 - 1]) + (matrice_nc [sommet2 - 1][sommet1 - 1])
+        return nombreChemin
+    else :
+        matrice_nc = puissance(matrice, longueur_chemin)
+        nombreChemin = (matrice_nc [sommet1 - 1] [sommet2 - 1])
+        return nombreChemin
 
 
 #----- Section sur les matrices booléennes -----#
@@ -104,7 +109,7 @@ def conversion_matrice_bool (matrice) :
     for i in range (len(matrice)) :
         for j in range (len(matrice)) :
             if matrice [i] [j] != 0 :
-                matrice_final [i] [j] = 1
+                matrice_final [i] [j] = 1 
     return matrice_final 
 
 def produit_bool (matrice1, matrice2) :
@@ -122,19 +127,16 @@ def matrice_identite (matrice) :
         matrice_i [i] [i] = 1 
     return matrice_i 
 
+def puissance_bool (matrice, n) :
+    return conversion_matrice_bool(puissance(matrice, n))
+
 def matrice_transitive (matrice) :
-    matrice_avant = matrice_identite(matrice)
-    matrice_final = matrice_zero(matrice)
-    tour = 1 
-    while matrice_avant != matrice_final :
-        if tour == 1 : 
-            matrice_apres = conversion_matrice_bool(puissance(matrice, tour))
-            matrice_final = addition_bool(matrice_avant, matrice_apres)
-            tour += 1 
-            matrice_avant = matrice_final
-        else :
-            matrice_apres = conversion_matrice_bool(puissance(matrice, tour))
-            matrice_final = addition_bool(matrice_final, matrice_apres)
-            tour += 1 
-            matrice_avant = matrice_final
-    return matrice_final
+    matriceT = matrice_identite(matrice)
+    matriceTback = None 
+    tour = 1
+    while matriceT != matriceTback :
+        matrice_add = puissance_bool(matrice, tour)
+        matriceTback = matriceT 
+        matriceT = addition_bool(matriceT, matrice_add)
+        tour += 1 
+    return afficher_matrice(matriceT)
