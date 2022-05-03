@@ -38,7 +38,7 @@ while partie != "STOP" :
 #---- Dernière partie ----#
 
     elif partie == "3" :
-
+        
         graphe_object = Graphe(4, [Arete(1, 1, 2), Arete(1, 3, 4), Arete(2, 2, 5), Arete(2, 1, 1), Arete(3, 2, 4), Arete(3, 3, 2), Arete(4, 1, 1), Arete(4, 4, 3)])
         graphe = adjacence(graphe_object)
         matrice_transitive(graphe)
@@ -49,5 +49,6 @@ while partie != "STOP" :
         exit()
 
     else :
+        
         print("Veuillez entrer une valeur correcte.")
         print()

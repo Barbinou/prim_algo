@@ -21,9 +21,6 @@ class Graphe:
         self.graphe[sommet_f][sommet_i] = valeur  # defini la valeur pour aller du 2eme sommet au 1er
         return self
 
-    def __str__(self):
-        return tabToString(self.graphe)
-
     def prim(self):
 
         grand_nombre = math.inf  # créa nombre infini qu'ils soit plus petit que la valeur du premier noeud
@@ -106,3 +103,11 @@ def tabToString(tab):
                     affichage += "┻━"  # séparateur
             affichage += "┛\n"  # ferme la dernière case et ajoute une ligne
     return affichage
+
+def PC_chemin (matrice) :   # affichage du plus court chemin 
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" 
+    # création de l'alphabet pour remplacer les chiffres en lettre 
+    for i in range(len(matrice)):
+        for j in range(i, len(matrice)):  # on part de i dans le range car c'est une matrice adjacente
+            if matrice[i][j] != 0:  # si la valeur dans la matrice est différente de 0
+                print (f"{alphabet[i]} ➡  {alphabet[j]} : {matrice[i][j]}")
