@@ -1,7 +1,7 @@
 import random
 import math
 
-def matrice_zero(length):  # Matrice de length par length de 0
+def matrice_zero(length):  # Matrice de length x length de 0
     matrice = []
     for i in range(length):
         matrice.append([])
@@ -110,4 +110,4 @@ def PC_chemin (matrice) :   # affichage du plus court chemin
     for i in range(len(matrice)):
         for j in range(i, len(matrice)):  # on part de i dans le range car c'est une matrice adjacente
             if matrice[i][j] != 0:  # si la valeur dans la matrice est différente de 0
-                print (f"{alphabet[i]} ➡  {alphabet[j]} : {matrice[i][j]}")
+                print (f"{alphabet[i]} ➡ {alphabet[j]} : {matrice[i][j]}")
