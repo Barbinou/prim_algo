@@ -1,7 +1,8 @@
 import random
 import math
 
-def matrice_zero(length):  # Matrice de length x length de 0
+
+def matrice_zero(length):  # Matrice de length par length de 0
     matrice = []
     for i in range(length):
         matrice.append([])
@@ -26,34 +27,35 @@ class Graphe:
         grand_nombre = math.inf  # créa nombre infini qu'ils soit plus petit que la valeur du premier noeud
 
         liste_noeud_parcouru = []  # création de la liste des sommets 
-        for i in range(self.nombre_sommet):  
+        for i in range(self.nombre_sommet):
             liste_noeud_parcouru.append(0)
 
         fin_boucle = 0
 
-        liste_noeud_parcouru[0] = True #premier sommet parcouru 
+        liste_noeud_parcouru[0] = True  # premier sommet parcouru
 
         prim = matrice_zero(self.nombre_sommet)  # créa de la matrice zero 
 
-        while fin_boucle < self.nombre_sommet - 1: 
+        while fin_boucle < self.nombre_sommet - 1:
 
-            min = grand_nombre   #min = infini pour que le chemin est tjrs une valeur plus petite 
+            min = grand_nombre  # min = infini pour que le chemin est tjrs une valeur plus petite
             sommet_i = 0
             sommet_f = 0
 
-            for i in range(self.nombre_sommet): # i etant la ligne et j la colonne on fait un double for 
+            for i in range(self.nombre_sommet):  # i etant la ligne et j la colonne on fait un double for
                 if liste_noeud_parcouru[i]:
                     for j in range(self.nombre_sommet):
                         if not liste_noeud_parcouru[j] and self.graphe[i][j]:
-                            if min > self.graphe[i][j]:  #change la condition du min si celui-ci est plus petit
+                            if min > self.graphe[i][j]:  # change la condition du min si celui-ci est plus petit
                                 min = self.graphe[i][j]
-                                sommet_i = i   
+                                sommet_i = i
                                 sommet_f = j
 
-            liste_noeud_parcouru[sommet_f] = True  #on marque le sommet que l'on vient de parcourir 
-            fin_boucle += 1   # on incremente 1 pour que la boucle s'arrête quand nous avons visiter tous les sommets 
-            prim[sommet_i][sommet_f] = min  #incremente la valeur dans la matrice zero de départ
-            prim[sommet_f][sommet_i] = prim[sommet_i][sommet_f] #comme c'est un graphe non orienté on ajoute dans les 2 sens 
+            liste_noeud_parcouru[sommet_f] = True  # on marque le sommet que l'on vient de parcourir
+            fin_boucle += 1  # on incremente 1 pour que la boucle s'arrête quand nous avons visiter tous les sommets
+            prim[sommet_i][sommet_f] = min  # incremente la valeur dans la matrice zero de départ
+            prim[sommet_f][sommet_i] = prim[sommet_i][
+                sommet_f]  # comme c'est un graphe non orienté on ajoute dans les 2 sens
 
         return prim
 
@@ -104,10 +106,11 @@ def tabToString(tab):
             affichage += "┛\n"  # ferme la dernière case et ajoute une ligne
     return affichage
 
-def PC_chemin (matrice) :   # affichage du plus court chemin 
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" 
+
+def PC_chemin(matrice):  # affichage du plus court chemin
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     # création de l'alphabet pour remplacer les chiffres en lettre 
     for i in range(len(matrice)):
         for j in range(i, len(matrice)):  # on part de i dans le range car c'est une matrice adjacente
             if matrice[i][j] != 0:  # si la valeur dans la matrice est différente de 0
-                print (f"{alphabet[i]} ➡ {alphabet[j]} : {matrice[i][j]}")
+                print(f"{alphabet[i]} ➡  {alphabet[j]} : {matrice[i][j]}")
